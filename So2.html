@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+
+        <title>ُSo2</title>
+
+    </head>
+
+    <body>
+       
+        <script>
+                
+                let obj={};
+                let state=confirm("Are you Ready?");
+                while(state==true)
+                {
+                    obj.name=prompt("Enter your name");
+                    alert(obj.name);
+                    obj.family=prompt("Enter your family");
+                    alert(obj.family);
+                    obj.age =prompt("Enter your Age");
+                    alert(obj.age);
+                    state=confirm("you do it again?");
+                }
+
+
+                document.write(obj.name);
+              
+                document.write(obj.family);
+             
+                document.write(obj.age);
+
+
+
+                console.log(obj);
+
+        </script>
+        
+
+    </body>
+
+</html>

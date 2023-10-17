@@ -26,9 +26,33 @@
      <p>سن : 20</p>
      <p>تحصیلات : کاردانی نرم افزار</p>
      <p id="aaa"> سلام احمد اکبر پورنژاد هستم دانشجوی کاردانی نرم افزار دانشکده شهید محمد منتظری </p>
+     <p id="sss">اجرا</p>
      <script>
-        let name=prompt("نام خود را وارد کنید")
-        alert(" خوش آمدید "+name);
+        let state=confirm("ادامه بدهیم؟");
+        let i=0;
+        let obj={};
+        function myfunc()
+        {
+            let x=0;
+            while(state==true)
+            {
+                let name =prompt("نام ");
+                let lastname=prompt("نام خانوادگی");
+                obj[i]=
+                {
+                    fname:name,
+                    lname:lastname
+                }
+                state=confirm("ادامه بدهیم؟");
+                i++;
+
+            }
+        }
+
+        //myfunc();
+
+        document.getElementById('sss').click(myfunc());
+        console.log(obj)
         
      </script>
      
