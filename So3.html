@@ -5,8 +5,10 @@
         <style>
             h2 {text-align: center; color: blue;}
             h3{text-align:right ;}
-            p {text-align: right;}
+            p {text-align: right; border: solid steelblue;}
             table{background-color: antiquewhite;}
+            #aaa{border: solid brown; color:black;}
+            .cl{background-color: azure;}
 
             body {background-color: darkseagreen;}
         </style>
@@ -18,11 +20,18 @@
        
 
         <br/>
-<h3>به نام خدا</h3>
+<h3 class="cl">به نام خدا</h3>
      <p>نام : احمد</p>
      <p> نام خانوادگی : اکبرپورنژاد</p>
      <p>سن : 20</p>
      <p>تحصیلات : کاردانی نرم افزار</p>
+     <p id="aaa"> سلام احمد اکبر پورنژاد هستم دانشجوی کاردانی نرم افزار دانشکده شهید محمد منتظری </p>
+     <script>
+        let name=prompt("نام خود را وارد کنید")
+        alert(" خوش آمدید "+name);
+        
+     </script>
+     
 
     
     </body>
