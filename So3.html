@@ -4,8 +4,8 @@
 
         <style>
             h2 {text-align: center; color: blue;}
-            h3{text-align:right ;}
-            p {text-align: right; border: solid steelblue;}
+            h3{text-align:center ;}
+            p {text-align: center; border: solid steelblue;}
             table{background-color: antiquewhite;}
             #aaa{border: solid brown; color:black;}
             .cl{background-color: azure;}
@@ -28,11 +28,18 @@
      <p id="aaa"> سلام احمد اکبر پورنژاد هستم دانشجوی کاردانی نرم افزار دانشکده شهید محمد منتظری </p>
      <p id="sss">اجرا</p>
      <script>
-        let state=confirm("ادامه بدهیم؟");
+        let state=false;
         let i=0;
         let obj={};
+
+        document.getElementById('sss').onclick=function(){
+
+        myfunc(); 
+         }
+
         function myfunc()
         {
+            state=confirm("دیتای جدید وارد می کنید");
             let x=0;
             while(state==true)
             {
@@ -47,11 +54,12 @@
                 i++;
 
             }
+
+         
         }
 
-        //myfunc();
 
-        document.getElementById('sss').click(myfunc());
+      
         console.log(obj)
         
      </script>
