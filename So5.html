@@ -6,11 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+     body {
+        background-color:midnightblue;
+     }
+
+        #btn3{
+           background-color:midnightblue ;
+           color: #fff;
+           border:2px dotted #fff;
+            font-size: 20px;
+            width: 140px;
+            height:90px;
+            
+     }
+
+     #btn4{
+           background-color:midnightblue ;
+           color: #fff;
+           border:2px dotted #fff;
+            font-size: 20px;
+            width: 140px;
+            height:90px;
+     }
+
         .box-saka
         {
-        width:100px;
-        height:100px;
-        background:#456321;
+         text-align: center;  
+        width:600px;
+        height:240px;
+        background:bisque;
         color:fff;
         border:2px dotted #fff;
         border-radius:4px;
@@ -22,22 +46,20 @@
 </head>
 <body>
     
-
+<center>
 
     <div class="box-saka">
 
         <article id="a3">
             <b>append html</b><br>
+            <br>
+            <br>
+            <br>
             <input id="btn3" type="button" value="ok">
     
         </article>
     
-        <script>
-           document.getElementById('btn3').addEventListener("click",function(){
-    document.getElementById('btn3').style.backgroundColor="red";
-    
-           })
-        </script>
+        
        
     </div>
 
@@ -45,11 +67,25 @@
     <div id="b1" class="box-saka">
 
       <script>
+          let x=true;
+          let i=1;
         document.getElementById('btn3').addEventListener("click",function(){
 
-        document.getElementById('b1').
+            if(i<=5)
+        {
+
+        document.getElementById('b1').innerHTML+="<p>name:<input> family:<input></p>"
+      
+        
+            i++;
+        }
+          
+        
+        
         })
       </script>
+
+    
        
     </div>
 
@@ -57,11 +93,27 @@
 
     <div class="box-saka">
 
+        <article id="a4">
+            <b></b><br>
+            <br>
+            <br>
+            <br>
+            <input id="btn4" type="button" value="Log">
+
+
+            <script>
+                document.getElementById('btn4').addEventListener("click",function(){
+
+                    
+                })
+            </script>
+    
+        </article>
       
     </div>
 
     
 
-
+</center>
 </body>
 </html>
