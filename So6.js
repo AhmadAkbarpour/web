@@ -17,11 +17,18 @@ let obj={
 
         console.log(a+b);
 
+        response.writeHead(200,headers);
+        response.write('salam '+request.url);
+        response.end();
+
     },
 
     m: function(){
 
         console.log(a-b);
+        response.writeHead(200,headers);
+        response.write('salam '+request.url);
+        response.end();
 
     },
 
@@ -46,8 +53,6 @@ function requestHandler (request, response){
 
      obj[firstpart]();
 
-    response.writeHead(200,headers);
-    response.write('salam '+request.url);
-    response.end();
+   
 
 }
