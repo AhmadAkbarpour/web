@@ -10,7 +10,7 @@ let b=2;
 
 let obj={
 
-    s: function(){
+    s: function(response,request){
 
       
 
@@ -23,7 +23,7 @@ let obj={
 
     },
 
-    m: function(){
+    m: function(response,request){
 
         console.log(a-b);
         response.writeHead(200,headers);
@@ -32,10 +32,14 @@ let obj={
 
     },
 
-    "favicon.ico":function(){
+    // "favicon.ico":function(response,request){
 
-        console.log('favicon');
-    }
+    //     console.log('favicon');
+
+    //     response.writeHead(200,headers);
+    //     response.write('salam '+request.url);
+    //     response.end();
+    // }
 
 
 
@@ -51,7 +55,9 @@ function requestHandler (request, response){
 
     console.log(firstpart);
 
-     obj[firstpart]();
+    if(firstpart!=='favicon.ico'){
+     obj[firstpart](response,request);
+    }
 
    
 
