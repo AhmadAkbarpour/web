@@ -46,7 +46,7 @@ let obj={
     
 }
 
-function requestHandler (request, response){
+function requestHandler (request,response){
     
     console.log('request url: ', request.url);
     console.log('request method: ', request.method);
@@ -55,9 +55,11 @@ function requestHandler (request, response){
 
     console.log(firstpart);
 
-    if(firstpart!=='favicon.ico'){
-     obj[firstpart](response,request);
+    if(firstpart !== 'favicon.ico') {
+     obj[firstpart]();
     }
+
+    
 
    
 
