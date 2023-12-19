@@ -1,9 +1,11 @@
 
 let http = require('http');
 let fs = require('fs');
-const { json } = require('stream/consumers');
 let port = 8037;
 let server = http.createServer(requestHandler);
+
+let axios=require("axios");
+
 server.listen(port);
 console.log("Server is running on port:" + port)
 
@@ -13,18 +15,25 @@ let headers = {
     jpg: { 'Content-Type': 'image/jpeg' }
 };
 
+let myIndex=require("./insertToFile/index");
+
 function write(response, badaneh, type){
     response.writeHead(200, headers[type]);
     response.write(badaneh);
     response.end();
 }
 
-function funcx(request, response) {
-    console.log('this is x');
-    write(response, 'salam xxxxx', 'text');
-    // response.writeHead(200, headers.text);
-    // response.write('salam xxxxx');
-    // response.end();
+function funcx(request, response, data) {
+    axios.post('http://127.0.0.1:8038/x', data
+      )
+      .then(function (response2) {
+        console.log("success:", response2);
+
+       write(response, response2.data, "text")
+      })
+      .catch(function (error) {
+        console.log("error:", error);
+      });
 
 }
 
@@ -160,50 +169,62 @@ function fileControllerB(request, response) {
     console.log('fileController 3')
 }
 
-
-function InsertToFile(request,response,data){
-    console.log("this is InsertToFile");
-
-    fs.writeFile('message.txt',data,'utf8',function(error){
-     
+function insertToFileA(request, response, data){
+    console.log("inside insertToFile", data);
+    data = JSON.stringify(data);
+    console.log("sss", data)
+    fs.appendFile('message.txt', data, function(error) {
         if(error){
-
-            write(response,'fs error','text');
+            write(response, 'FS ERROR.', 'text');
         }
         else{
-            write(response,'data saved','text');
+            write(response, "Data Saved.", 'text'); 
         }
-
-    });
+    }); 
 }
 
-
-function InsertToFileC(request,response,data){
-
-    console.log(" this InsertToFile C :  " , data);
-
-    fs.readFile('message.txt',function(error,fileData){
-
+function insertToFileB(request, response, data){
+    console.log("inside insertToFile", data);
+    data = JSON.stringify(data);
+    console.log("sss", data)
+    fs.appendFile('message.txt', data, function(error) {
         if(error){
-            write(response,'file not found','text');
+            write(response, 'FS ERROR.', 'text');
         }
         else{
-            console.log(typeof fileData);
-            fileData=JSON.parse(fileData);
-            console.log(typeof fileData);
-            fileData.data.push(JSON.parse(data));
-            console.log(fileData);
-            fileData=JSON.stringify(fileData);
-
-            fs.writeFile('message.txt',fileData,'utf8',function(error){
-
+            fs.readFile('message.txt', function (error, fileData) {
                 if(error){
-                    write(response,'fs error','text');
+                    write(response, 'FILE NOT FOUND.', 'text');
                 }
                 else{
-                    write(response,'data saved','text');
+                    write(response, fileData, 'text'); 
                 }
-            });
+            })
+        }
+    }); 
+}
+
+function insertToFileC(request, response, data){
+    console.log("inside insertToFile", data);
+
+    fs.readFile('message.txt', function (error, fileData) {
+        if(error){
+            write(response, 'FILE NOT FOUND.', 'text');
+        }
+        else{
+
+            fileData = JSON.parse(fileData);
+            fileData.data.push(JSON.parse(data));
+            fileData = JSON.stringify(fileData);
+
+            fs.writeFile('message.txt', fileData, 'utf8', function(error) {
+                if(error){
+                    write(response, 'FS ERROR.', 'text');
+                }
+                else{
+                    write(response, "Data Saved.", 'text'); 
+                }
+            }); 
         }
     });
 }
@@ -219,12 +240,8 @@ let routes = {
     page2c: page2controllerC,
     page2d: page2controllerD,
     file: fileControllerB,
-    insert:InsertToFile,
-    insertc:InsertToFileC
+    insertToFile:myIndex.insert
 }
-
-
-let data="";
 
 function requestHandler(request, response) {
     let firstPart = request.url.split('/')[1];
@@ -232,33 +249,24 @@ function requestHandler(request, response) {
     if (firstPart !== 'favicon.ico') {
 
         console.log('______________________________________________________')
-        console.log('url       ', request.url);
+        console.log('method:url', request.method, request.url);
         console.log('splitted  ', request.url.split('/'));
         console.log('firstPart ', firstPart);
-
-
-
         
-        request.on('data',function(chunc){
-            
-              data+=chunc;
+        let data = "";
+        request.on('data', function(chunk){  
+            data += chunk;
         });
-
-        request.on('end',function(){
-
-            console.log("data:   " + data);
-
+        request.on('end', function(){
+            console.log("Data:   ", data);
             try{
-                routes[firstPart](request, response,data);
+                routes[firstPart](request, response, data);
             }
             catch(error){
                 console.log('CATCHED ERROR', error);
                 write(response, 'ERROR... ROUTE NOT FOUND.', 'text');
             }
-        });
-
-
-       
+        });               
     }
 }
 

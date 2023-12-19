@@ -1,5 +1,1 @@
-{
-"name":"ahamd",
-"family":"akbarpour"
-
-}
+{"data":[{"name":"ahmad","phon":"09010956055"},{"name":"ahmad","phon":"09010956055"},{"name":"ahmad","phon":"09010956055","email":"ahmad@gmail.com"},{"name":"ahmad","phon":"09010956055","email":"ahmad@gmail.com"}]}
